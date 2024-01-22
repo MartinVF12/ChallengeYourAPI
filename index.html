@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Code Quiz</title>
+</head>
+
+<body>
+    <header>
+        <h1>Code Quiz</h1>
+    </header>
+    <main>
+        <section id="startSection">
+            <button id="startButton">Start</button>
+        </section>
+        <section id="quizSection">
+            <div id="quizContainer">
+                <h2>Question 1:</h2>
+                <p>What does HTML stand for?</p>
+                <ul>
+                    <li><button data-correct="true">Hyper Text Markup Language</button></li>
+                    <li><button>Hyperlink and Text Markup Language</button></li>
+                    <li><button>High Tech Markup Language</button></li>
+                </ul>
+            </div>
+        </section>
+        <section id="resultSection">
+            <div id="resultContainer">
+                <p>Your Score: <span id="score">0</span></p>
+                <label for="initials">Enter Initials:</label>
+                <input type="text" id="initials">
+                <button id="saveButton">Save</button>
+                <button id="repeatButton">Repeat Quiz</button>
+                <div id="previousInitials">
+
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>

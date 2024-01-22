@@ -1,0 +1,103 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo del encabezado */
+h1 {
+    color: #333;
+    text-align: center;
+    padding: 20px;
+    background-color: #007bff;
+    margin: 0;
+}
+
+/* Estilo del botón de inicio */
+button#startButton {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+/* Contenedor del cuestionario */
+#quizContainer {
+    display: none;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Estilo de las preguntas */
+#quizContainer h2 {
+    color: #333;
+    font-size: 24px;
+    margin-top: 0;
+}
+
+/* Estilo de las opciones de respuesta */
+#quizContainer ul {
+    list-style: none;
+    padding: 0;
+}
+
+#quizContainer li {
+    margin: 10px 0;
+}
+
+button[data-correct="true"] {
+    background-color: #28a745;
+    color: #fff;
+}
+
+button[data-correct="false"] {
+    background-color: #28a745;
+    color: #fff;
+}
+
+/* Contenedor del resultado */
+#resultContainer {
+    display: none;
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+/* Estilo del resultado */
+#resultContainer p {
+    color: #333;
+    font-size: 18px;
+}
+
+label[for="initials"] {
+    font-size: 16px;
+}
+
+/* Estilo del campo de iniciales y botón de guardar */
+#initials {
+    padding: 10px;
+    margin: 5px 0;
+    width: 100%;
+}
+
+#saveButton {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
