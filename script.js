@@ -6,11 +6,12 @@ const initialsInput = document.getElementById("initials");
 const saveButton = document.getElementById("saveButton");
 const repeatButton = document.getElementById("repeatButton");
 const previousInitialsDiv = document.getElementById("previousInitials");
-
+const timerElement = document.getElementById("timer");
 
 let score = 0;
 let currentQuestionIndex = 0;
-
+let timeLeft = 60;
+let timerInterval;
 
 const questions = [
     {
@@ -39,13 +40,25 @@ const questions = [
     }
 ];
 
-
 function startGame() {
     startButton.style.display = "none";
     quizContainer.style.display = "block";
+    timerElement.style.display = "block";
     loadQuestion();
+    startTimer();
 }
 
+function startTimer() {
+    timerInterval = setInterval(function () {
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            endGame();
+        } else {
+            timerElement.textContent = `${timeLeft} seconds`;
+            timeLeft--;
+        }
+    }, 1000);
+}
 
 function loadQuestion() {
     const currentQuestion = questions[currentQuestionIndex];
@@ -60,7 +73,6 @@ function loadQuestion() {
         button.addEventListener("click", selectAnswer);
     });
 }
-
 
 function selectAnswer(event) {
     const selectedButton = event.target;
@@ -80,11 +92,9 @@ function selectAnswer(event) {
     }
 }
 
-
 function endGame() {
     quizContainer.style.display = "none";
     resultContainer.style.display = "block";
-
 
     const previousInitials = localStorage.getItem("initials");
     const previousScore = localStorage.getItem("punctuation");
@@ -93,28 +103,109 @@ function endGame() {
         previousInitialsDiv.innerHTML = `<p>Previous Initials: ${previousInitials}</p>`;
     }
 
-
+    clearInterval(timerInterval);
+    repeatButton.style.display = "block"; // Mostrar el botón "Repeat Quiz"
     repeatButton.addEventListener("click", repeatQuiz);
 }
-
 
 function repeatQuiz() {
     currentQuestionIndex = 0;
     score = 0;
     scoreElement.textContent = score;
+    timeLeft = 60;
+    timerElement.style.display = "block";
+    timerElement.textContent = `${timeLeft} seconds`;
     loadQuestion();
     resultContainer.style.display = "none";
     quizContainer.style.display = "block";
+    startTimer(); // Iniciar el temporizador nuevamente
+    repeatButton.style.display = "none"; // Ocultar el botón "Repeat Quiz" después de reiniciar
 }
-
 
 function saveScore() {
     const initials = initialsInput.value;
     localStorage.setItem("initials", initials);
     localStorage.setItem("punctuation", score);
     alert("Score saved successfully");
+
+    const scoreTableBody = document.getElementById("scoreTableBody");
+    const row = scoreTableBody.insertRow();
+    const initialsCell = row.insertCell(0);
+    const scoreCell = row.insertCell(1);
+    initialsCell.textContent = initials;
+    scoreCell.textContent = score;
+
+    const scoreTable = document.getElementById("scoreTable");
+    scoreTable.style.display = "block";
 }
 
+startButton.addEventListener("click", startGame);
+saveButton.addEventListener("click", saveScore);
+
+function startTimer() {
+    timerInterval = setInterval(function () {
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            endGame();
+        } else {
+            timerElement.textContent = `${timeLeft} seconds`; // Cambia "segundos" por "seconds"
+            timeLeft--;
+        }
+    }, 1000);
+}
+// ... Tu código anterior ...
+
+function startTimer() {
+    timerInterval = setInterval(function () {
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            endGame();
+        } else {
+            timerElement.textContent = `${timeLeft} seconds`;
+            if (timeLeft <= 5) { // Agregar un mensaje cuando el tiempo es bajo
+                timerElement.style.color = "red";
+            }
+            timeLeft--;
+        }
+    }, 1000);
+}
+
+function endGame() {
+    quizContainer.style.display = "none";
+    resultContainer.style.display = "block";
+
+    const previousInitials = localStorage.getItem("initials");
+    const previousScore = localStorage.getItem("punctuation");
+
+    if (previousInitials && previousScore) {
+        previousInitialsDiv.innerHTML = `<p>Previous Initials: ${previousInitials}</p>`;
+    }
+
+    clearInterval(timerInterval);
+    repeatButton.style.display = "block"; // Mostrar el botón "Repeat Quiz"
+    repeatButton.addEventListener("click", repeatQuiz);
+
+    if (timeLeft <= 0) {
+        timerElement.textContent = "Time's up!"; // Mostrar un mensaje cuando se agote el tiempo
+    }
+    timerElement.style.color = "initial"; // Restaurar el color del temporizador
+}
+
+function repeatQuiz() {
+    currentQuestionIndex = 0;
+    score = 0;
+    scoreElement.textContent = score;
+    timeLeft = 60;
+    timerElement.style.display = "block";
+    timerElement.textContent = `${timeLeft} seconds`;
+    loadQuestion();
+    resultContainer.style.display = "none";
+    quizContainer.style.display = "block";
+    startTimer(); // Iniciar el temporizador nuevamente
+    repeatButton.style.display = "none"; // Ocultar el botón "Repeat Quiz" después de reiniciar
+}
+
+// ... Tu código anterior ...
 
 startButton.addEventListener("click", startGame);
 saveButton.addEventListener("click", saveScore);

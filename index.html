@@ -17,7 +17,7 @@
             <button id="startButton">Start</button>
         </section>
         <section id="quizSection">
-            <div id="quizContainer">
+            <div id="quizContainer" style="display: none;">
                 <h2>Question 1:</h2>
                 <p>What does HTML stand for?</p>
                 <ul>
@@ -28,17 +28,29 @@
             </div>
         </section>
         <section id="resultSection">
-            <div id="resultContainer">
+            <div id="resultContainer" style="display: none;">
                 <p>Your Score: <span id="score">0</span></p>
                 <label for="initials">Enter Initials:</label>
                 <input type="text" id="initials">
                 <button id="saveButton">Save</button>
                 <button id="repeatButton">Repeat Quiz</button>
                 <div id="previousInitials">
-
+                    <p>Previous Initials: <span id="previousScore">XX</span></p>
                 </div>
+                <table id="scoreTable" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th>Initials</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scoreTableBody">
+                        <!-- Aquí se agregarán las filas de la tabla -->
+                    </tbody>
+                </table>
             </div>
         </section>
+        <p id="timer" style="display: none;">60 segundos</p>
     </main>
     <script src="script.js"></script>
 </body>
